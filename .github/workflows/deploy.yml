@@ -1,0 +1,45 @@
+name: Deploy Frontend
+
+on:
+    push:
+        branches: [main]
+    workflow_dispatch:
+
+concurrency:
+    group: deploy-frontend
+    cancel-in-progress: true
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 22
+                  cache: npm
+
+            - run: npm ci
+            - run: npm run build
+
+            - uses: appleboy/scp-action@v1
+              with:
+                  host: ${{ secrets.ORACLE_HOST }}
+                  username: ${{ secrets.ORACLE_USER }}
+                  key: ${{ secrets.ORACLE_SSH_KEY }}
+                  source: "dist/*"
+                  target: "~/frontend-staging"
+                  strip_components: 1
+                  rm: true
+
+            - uses: appleboy/ssh-action@v1
+              with:
+                  host: ${{ secrets.ORACLE_HOST }}
+                  username: ${{ secrets.ORACLE_USER }}
+                  key: ${{ secrets.ORACLE_SSH_KEY }}
+                  script: |
+                      set -e
+                      rsync -a --delete ~/frontend-staging/ /var/www/ecommerce/
+                      # re-apply SELinux labels to the new files
+                      restorecon -R /var/www/ecommerce
