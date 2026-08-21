@@ -28,7 +28,7 @@ export function useCheckout() {
     const { user } = useCurrentUser();
 
     return useMutation({
-        mutationFn: async (amount: number) => {
+        mutationFn: async () => {
             const order = await ordersApi.create();
 
             // Narrowed to a local so TypeScript keeps it defined inside the callback below.
@@ -38,7 +38,7 @@ export function useCheckout() {
             }
 
             await loadRazorpayCheckout();
-            const paymentOrder = await ordersApi.createPaymentOrder(amount);
+            const paymentOrder = await ordersApi.createPaymentOrder(order._id);
 
             const paid = await new Promise<boolean>((resolve, reject) => {
                 const checkout = new window.Razorpay!({

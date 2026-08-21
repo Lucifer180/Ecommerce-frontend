@@ -18,8 +18,8 @@ export function useLogin() {
     return useMutation({
         mutationFn: authApi.login,
         onSuccess: async (response) => {
-            const { acesstoken, refreshToken, role } = response.data;
-            tokenStorage.setSession({ accessToken: acesstoken, refreshToken, role });
+            const { accessToken, refreshToken, role } = response.data;
+            tokenStorage.setSession({ accessToken, refreshToken, role });
 
             await queryClient.invalidateQueries({ queryKey: queryKeys.auth.me });
         },

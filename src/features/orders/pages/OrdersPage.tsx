@@ -9,9 +9,10 @@ import { formatDate, formatPrice } from "@shared/lib/format";
 import { useMyOrders } from "../hooks/useOrders";
 import type { OrderStatus } from "../types";
 
-const statusColor: Record<OrderStatus, "gray" | "warning" | "success" | "blue"> = {
+const statusColor: Record<OrderStatus, "gray" | "warning" | "success" | "error" | "blue"> = {
     pending: "warning",
     paid: "success",
+    failed: "error",
     shipped: "blue",
     delivered: "gray",
 };

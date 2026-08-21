@@ -14,8 +14,13 @@ class OrdersApi {
         return data.data ?? [];
     }
 
-    async createPaymentOrder(amount: number): Promise<RazorpayOrder> {
-        const { data } = await client.post<{ success: boolean; order: RazorpayOrder }>("/payments/create-order", { amount });
+    /**
+     * Opens a Razorpay order against one of our own orders. The amount is not
+     * sent — the server reads it from the stored order, so the browser cannot
+     * name its own price.
+     */
+    async createPaymentOrder(orderId: string): Promise<RazorpayOrder> {
+        const { data } = await client.post<{ success: boolean; order: RazorpayOrder }>("/payments/create-order", { orderId });
         return data.order;
     }
 

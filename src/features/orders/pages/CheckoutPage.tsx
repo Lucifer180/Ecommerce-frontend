@@ -94,7 +94,7 @@ export default function CheckoutPage() {
                             iconLeading={CreditCard02}
                             isLoading={checkout.isPending}
                             isDisabled={checkout.isPending}
-                            onPress={() => checkout.mutate(total)}
+                            onPress={() => checkout.mutate()}
                         >
                             {razorpayKeyId ? `Pay ${formatPrice(total)}` : "Place order"}
                         </Button>

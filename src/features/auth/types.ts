@@ -25,10 +25,10 @@ export interface User {
     createdAt?: string;
 }
 
-/** `POST /auth/login` and `/auth/register` — note the backend's `acesstoken` spelling. */
+/** `POST /auth/login` and `/auth/register`. */
 export interface AuthTokenResponse {
     success: boolean;
-    acesstoken: string;
+    accessToken: string;
     refreshToken: string;
     role: User["role"];
     user: User;

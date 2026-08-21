@@ -1,6 +1,7 @@
 import type { Product } from "@features/products/types";
 
-export type OrderStatus = "pending" | "paid" | "shipped" | "delivered";
+/** `failed` is set by the payment webhook, which also releases the reserved stock. */
+export type OrderStatus = "pending" | "paid" | "failed" | "shipped" | "delivered";
 
 export interface OrderItem {
     _id: string;
