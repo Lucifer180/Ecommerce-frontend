@@ -1,4 +1,5 @@
 import type { ProductListParams } from "@features/products/types";
+import type { RecommendationInput } from "@features/recommendations/types";
 
 export const queryKeys = {
     auth: {
@@ -9,6 +10,9 @@ export const queryKeys = {
         list: (params: ProductListParams) => ["products", "list", params] as const,
         detail: (id: string) => ["products", "detail", id] as const,
         search: (keyword: string) => ["products", "search", keyword] as const,
+    },
+    recommendations: {
+        forProduct: (input: RecommendationInput) => ["recommendations", input] as const,
     },
     cart: {
         all: ["cart"] as const,

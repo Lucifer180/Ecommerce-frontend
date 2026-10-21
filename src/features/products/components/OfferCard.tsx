@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { LinkExternal01 } from "@untitledui/icons";
+import { ChevronDown, LinkExternal01, Stars02 } from "@untitledui/icons";
 
 import { Badge } from "@/components/base/badges/badges";
 import { cx } from "@/utils/cx";
+import { CompleteTheLook } from "@features/recommendations";
 import { formatPrice } from "@shared/lib/format";
 
 import { platformLabel } from "../platforms";
@@ -26,6 +27,7 @@ const cheapestPerPlatform = (offers: ProductOffer[]) => {
  */
 export const OfferCard = ({ group }: { group: ProductGroup }) => {
     const [imageFailed, setImageFailed] = useState(false);
+    const [isStyling, setIsStyling] = useState(false);
     const offers = cheapestPerPlatform(group.offers);
     const image = group.image || offers.find((offer) => offer.image)?.image;
 
@@ -93,6 +95,23 @@ export const OfferCard = ({ group }: { group: ProductGroup }) => {
                         );
                     })}
                 </ul>
+
+                <div className="border-t border-secondary pt-3">
+                    <button
+                        type="button"
+                        aria-expanded={isStyling}
+                        onClick={() => setIsStyling((open) => !open)}
+                        className="flex w-full items-center justify-between gap-2 text-sm font-semibold text-brand-secondary hover:text-brand-secondary_hover"
+                    >
+                        <span className="flex items-center gap-1.5">
+                            <Stars02 className="size-4" aria-hidden />
+                            Complete the look
+                        </span>
+                        <ChevronDown className={cx("size-4 transition", isStyling && "rotate-180")} aria-hidden />
+                    </button>
+                    {/* Only asks the model once the user opens it. */}
+                    {isStyling && <CompleteTheLook product={{ title: group.title, brand: group.brand || undefined }} variant="compact" className="mt-3" />}
+                </div>
             </div>
         </article>
     );

@@ -5,6 +5,7 @@ import { ArrowLeft, CheckCircle, Package, ShieldTick, ShoppingCart01, Truck01 } 
 import { Badge } from "@/components/base/badges/badges";
 import { Button } from "@/components/base/buttons/button";
 import { useAddToCart } from "@features/cart/hooks/useCart";
+import { CompleteTheLook } from "@features/recommendations";
 import { ROUTES } from "@routes/paths";
 import { Alert } from "@shared/components/alert";
 import { ErrorState, PageSpinner } from "@shared/components/states";
@@ -128,6 +129,8 @@ export default function ProductDetailPage() {
                     </ul>
                 </div>
             </div>
+
+            <CompleteTheLook product={{ title: product.name, category: product.category }} className="border-t border-secondary pt-10" />
         </div>
     );
 }
