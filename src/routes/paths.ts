@@ -1,8 +1,7 @@
 export const ROUTES = {
     HOME: "/",
 
-    PRODUCTS: "/products",
-    PRODUCT_DETAIL: (id: string) => `/products/${id}`,
+    // Products come from other stores via Crawler-Service; there is no catalogue page.
     SEARCH: "/search",
 
     CART: "/cart",

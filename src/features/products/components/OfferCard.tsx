@@ -116,3 +116,14 @@ export const OfferCard = ({ group }: { group: ProductGroup }) => {
         </article>
     );
 };
+
+export const OfferCardSkeleton = () => (
+    <div className="flex flex-col overflow-hidden rounded-2xl border border-secondary bg-primary">
+        <div className="aspect-4/3 animate-pulse bg-secondary" />
+        <div className="flex flex-col gap-3 p-4">
+            <div className="h-4 w-2/3 animate-pulse rounded bg-secondary" />
+            <div className="h-9 w-full animate-pulse rounded-lg bg-secondary" />
+            <div className="h-9 w-full animate-pulse rounded-lg bg-secondary" />
+        </div>
+    </div>
+);

@@ -13,11 +13,3 @@ export function useProducts(params: ProductListParams) {
         placeholderData: keepPreviousData,
     });
 }
-
-export function useProduct(id?: string) {
-    return useQuery({
-        queryKey: queryKeys.products.detail(id ?? ""),
-        queryFn: () => productsApi.getById(id!),
-        enabled: Boolean(id),
-    });
-}

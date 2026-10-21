@@ -13,8 +13,8 @@ export default function NotFoundPage() {
                 <Button size="lg" color="secondary" href={ROUTES.HOME}>
                     Go home
                 </Button>
-                <Button size="lg" href={ROUTES.PRODUCTS}>
-                    Browse products
+                <Button size="lg" href={ROUTES.SEARCH}>
+                    Search products
                 </Button>
             </div>
         </div>

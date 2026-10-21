@@ -32,8 +32,8 @@ export default function CartPage() {
                     title="Your cart is empty"
                     description="Once you add something, it'll show up here."
                     action={
-                        <Button size="lg" href={ROUTES.PRODUCTS}>
-                            Browse products
+                        <Button size="lg" href={ROUTES.SEARCH}>
+                            Search products
                         </Button>
                     }
                 />
@@ -53,7 +53,7 @@ export default function CartPage() {
                                 <Button size="lg" className="w-full" onPress={() => navigate(ROUTES.CHECKOUT)}>
                                     Proceed to checkout
                                 </Button>
-                                <Button size="lg" color="secondary" className="w-full" onPress={() => navigate(ROUTES.PRODUCTS)}>
+                                <Button size="lg" color="secondary" className="w-full" onPress={() => navigate(ROUTES.SEARCH)}>
                                     Continue shopping
                                 </Button>
                             </div>

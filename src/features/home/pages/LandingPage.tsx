@@ -1,7 +1,6 @@
 import { CallToAction } from "../components/CallToAction";
-import { CategoryTiles } from "../components/CategoryTiles";
-import { FeaturedProducts } from "../components/FeaturedProducts";
 import { Hero } from "../components/Hero";
+import { PopularSearches } from "../components/PopularSearches";
 import { ValueProps } from "../components/ValueProps";
 
 export default function LandingPage() {
@@ -9,8 +8,7 @@ export default function LandingPage() {
         <>
             <Hero />
             <ValueProps />
-            <FeaturedProducts />
-            <CategoryTiles />
+            <PopularSearches />
             <CallToAction />
         </>
     );

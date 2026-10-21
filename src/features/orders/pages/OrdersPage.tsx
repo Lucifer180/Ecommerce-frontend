@@ -34,8 +34,8 @@ export default function OrdersPage() {
                     title="No orders yet"
                     description="When you place an order it'll appear here."
                     action={
-                        <Button size="lg" href={ROUTES.PRODUCTS}>
-                            Start shopping
+                        <Button size="lg" href={ROUTES.SEARCH}>
+                            Search products
                         </Button>
                     }
                 />

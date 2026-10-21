@@ -22,8 +22,8 @@ export const CallToAction = () => {
                 </div>
 
                 <div className="flex flex-col gap-3 sm:flex-row">
-                    <Button size="xl" color="secondary" href={ROUTES.PRODUCTS} iconTrailing={ArrowRight}>
-                        Browse the catalogue
+                    <Button size="xl" color="secondary" href={ROUTES.SEARCH} iconTrailing={ArrowRight}>
+                        Search products
                     </Button>
                     {!isAuthenticated && (
                         <Button size="xl" href={ROUTES.REGISTER}>

@@ -38,8 +38,8 @@ export default function CheckoutPage() {
                     title="Nothing to check out"
                     description="Your cart is empty."
                     action={
-                        <Button size="lg" href={ROUTES.PRODUCTS}>
-                            Browse products
+                        <Button size="lg" href={ROUTES.SEARCH}>
+                            Search products
                         </Button>
                     }
                 />

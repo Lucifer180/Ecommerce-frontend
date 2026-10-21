@@ -1,16 +1,19 @@
+import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import { SearchLg } from "@untitledui/icons";
 
+import { Button } from "@/components/base/buttons/button";
+import { Input } from "@/components/base/input/input";
 import { EmptyState, ErrorState } from "@shared/components/states";
 import { getApiErrorMessage } from "@shared/lib/errors";
 
-import { ProductCardSkeleton } from "../components/ProductCard";
-import { OfferCard } from "../components/OfferCard";
+import { OfferCard, OfferCardSkeleton } from "../components/OfferCard";
 import { platformLabel } from "../platforms";
 import { MIN_SEARCH_LENGTH, useProductSearch } from "../hooks/useProductSearch";
 
 /** Results come from Crawler-Service, which searches the external stores live. */
 export default function SearchPage() {
-    const [searchParams] = useSearchParams();
+    const [searchParams, setSearchParams] = useSearchParams();
     const keyword = (searchParams.get("q") ?? "").trim();
 
     const { data, isPending, isError, error, refetch } = useProductSearch(keyword);
@@ -29,8 +32,11 @@ export default function SearchPage() {
                 </p>
             </header>
 
+            {/* Keyed on the URL keyword so the box resets when a link or the header starts a new search. */}
+            <SearchForm key={keyword} initial={keyword} onSearch={(q) => setSearchParams({ q })} />
+
             {keyword.length < MIN_SEARCH_LENGTH ? (
-                <EmptyState title="Search for a product" description={`Type at least ${MIN_SEARCH_LENGTH} characters in the search bar.`} />
+                <EmptyState title="Search for a product" description="We'll look it up on Amazon, Flipkart and Myntra and line up the prices." />
             ) : isError ? (
                 <ErrorState description={getApiErrorMessage(error, "We couldn't search the stores right now.")} onRetry={() => refetch()} />
             ) : isPending ? (
@@ -40,7 +46,7 @@ export default function SearchPage() {
                     </p>
                     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                         {Array.from({ length: 8 }).map((_, index) => (
-                            <ProductCardSkeleton key={index} />
+                            <OfferCardSkeleton key={index} />
                         ))}
                     </div>
                 </div>
@@ -67,3 +73,25 @@ export default function SearchPage() {
         </div>
     );
 }
+
+/** The header search is hidden on small screens, so the page carries its own. */
+const SearchForm = ({ initial, onSearch }: { initial: string; onSearch: (q: string) => void }) => {
+    const [value, setValue] = useState(initial);
+    const q = value.trim();
+
+    return (
+        <form
+            role="search"
+            className="flex flex-col gap-3 sm:flex-row sm:items-start"
+            onSubmit={(event) => {
+                event.preventDefault();
+                if (q.length >= MIN_SEARCH_LENGTH) onSearch(q);
+            }}
+        >
+            <Input aria-label="Search products" icon={SearchLg} placeholder="Search shirts, earbuds, phones…" value={value} onChange={setValue} className="flex-1" />
+            <Button type="submit" size="md" isDisabled={q.length < MIN_SEARCH_LENGTH}>
+                Search
+            </Button>
+        </form>
+    );
+};

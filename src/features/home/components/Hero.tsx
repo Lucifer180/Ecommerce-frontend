@@ -10,19 +10,19 @@ export const Hero = () => (
             <div className="flex flex-col items-start gap-8">
                 <span className="flex items-center gap-2 rounded-full border border-secondary bg-secondary px-3 py-1 text-sm font-medium text-secondary">
                     <Star01 className="size-4 text-fg-brand-primary" />
-                    New season, new arrivals
+                    Amazon, Flipkart and Myntra in one search
                 </span>
 
                 <div className="flex flex-col gap-5">
-                    <h1 className="text-display-lg font-semibold text-primary md:text-display-xl">Things worth keeping.</h1>
+                    <h1 className="text-display-lg font-semibold text-primary md:text-display-xl">Find it. Compare it.</h1>
                     <p className="max-w-lg text-xl text-tertiary">
-                        A small, carefully chosen catalogue. Free delivery over ₹999, secure checkout, and returns that don't need a phone call.
+                        Search once and see the same product's price on every store, with AI suggestions for what goes with it.
                     </p>
                 </div>
 
                 <div className="flex flex-col gap-3 sm:flex-row">
-                    <Button size="xl" href={ROUTES.PRODUCTS} iconTrailing={ArrowRight}>
-                        Shop all products
+                    <Button size="xl" href={ROUTES.SEARCH} iconTrailing={ArrowRight}>
+                        Start searching
                     </Button>
                     <Button size="xl" color="secondary" href={ROUTES.REGISTER}>
                         Create an account

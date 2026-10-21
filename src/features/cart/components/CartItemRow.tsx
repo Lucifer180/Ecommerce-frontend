@@ -1,9 +1,7 @@
-import { Link } from "react-router-dom";
 import { Trash01 } from "@untitledui/icons";
 
 import { Button } from "@/components/base/buttons/button";
 import { ProductImage } from "@features/products/components/ProductImage";
-import { ROUTES } from "@routes/paths";
 import { formatPrice } from "@shared/lib/format";
 
 import { useRemoveCartItem, useUpdateCartItem } from "../hooks/useCart";
@@ -29,14 +27,12 @@ export const CartItemRow = ({ item }: { item: CartItem }) => {
 
     return (
         <li className="flex flex-col gap-4 py-6 sm:flex-row sm:items-center">
-            <Link to={ROUTES.PRODUCT_DETAIL(product._id)} className="size-24 shrink-0 overflow-hidden rounded-xl border border-secondary bg-secondary">
+            <div className="size-24 shrink-0 overflow-hidden rounded-xl border border-secondary bg-secondary">
                 <ProductImage product={product} />
-            </Link>
+            </div>
 
             <div className="flex flex-1 flex-col gap-1">
-                <Link to={ROUTES.PRODUCT_DETAIL(product._id)} className="text-md font-semibold text-primary hover:underline">
-                    {product.name}
-                </Link>
+                <p className="text-md font-semibold text-primary">{product.name}</p>
                 {product.category && <p className="text-sm text-tertiary">{product.category}</p>}
                 <p className="text-sm text-tertiary">{formatPrice(product.price)} each</p>
             </div>

@@ -1,5 +1,5 @@
 import { lazy, Suspense, type ReactNode } from "react";
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 
 import { authRoutes } from "@features/auth";
 import AdminLayout from "@layouts/AdminLayout";
@@ -10,14 +10,14 @@ import GuestRoute from "@routes/guards/GuestRoute";
 import ProtectedRoute from "@routes/guards/ProtectedRoute";
 import { PageSpinner } from "@shared/components/states";
 
+import { ROUTES } from "@routes/paths";
+
 import RootLayout from "./RootLayout";
 
 // The landing page is the common entry point, so it stays in the main bundle.
 import LandingPage from "@features/home/pages/LandingPage";
 
 // Everything else is split out — react-aria and the feature pages are heavy.
-const ProductsPage = lazy(() => import("@features/products/pages/ProductsPage"));
-const ProductDetailPage = lazy(() => import("@features/products/pages/ProductDetailPage"));
 const SearchPage = lazy(() => import("@features/products/pages/SearchPage"));
 const CartPage = lazy(() => import("@features/cart/pages/CartPage"));
 const CheckoutPage = lazy(() => import("@features/orders/pages/CheckoutPage"));
@@ -68,8 +68,8 @@ export const router = createBrowserRouter([
                 element: <MainLayout />,
                 children: [
                     { index: true, element: <LandingPage /> },
-                    { path: "products", element: deferred(<ProductsPage />) },
-                    { path: "products/:id", element: deferred(<ProductDetailPage />) },
+                    // The old catalogue pages; bookmarks and shared links land on search.
+                    { path: "products/*", element: <Navigate to={ROUTES.SEARCH} replace /> },
                     { path: "search", element: deferred(<SearchPage />) },
 
                     // Everything below needs a signed-in user.

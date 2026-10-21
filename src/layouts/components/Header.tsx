@@ -16,7 +16,7 @@ import { Logo } from "./Logo";
 
 const navLinks = [
     { label: "Home", to: ROUTES.HOME, end: true },
-    { label: "Products", to: ROUTES.PRODUCTS, end: false },
+    { label: "Search", to: ROUTES.SEARCH, end: false },
 ];
 
 const navLinkClass = ({ isActive }: { isActive: boolean }) =>
@@ -33,8 +33,8 @@ export const Header = () => {
 
     const submitSearch = () => {
         const keyword = search.trim();
-        // Search goes to the external stores via Crawler-Service; an empty search just browses our catalogue.
-        navigate(keyword ? `${ROUTES.SEARCH}?q=${encodeURIComponent(keyword)}` : ROUTES.PRODUCTS);
+        // Every search goes to the external stores via Crawler-Service.
+        navigate(keyword ? `${ROUTES.SEARCH}?q=${encodeURIComponent(keyword)}` : ROUTES.SEARCH);
         setIsMobileNavOpen(false);
     };
 

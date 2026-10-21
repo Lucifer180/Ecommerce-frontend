@@ -36,11 +36,6 @@ class ProductsApi {
         return normalizePage(data);
     }
 
-    async getById(id: string): Promise<Product> {
-        const { data } = await client.get<{ success: boolean; data: Product }>(`/products/${id}`);
-        return data.data;
-    }
-
     async search(keyword: string, signal?: AbortSignal): Promise<SearchResult> {
         const { data } = await client.get<{ success: boolean; data: SearchResult }>("/products/search", {
             params: { keyword },
