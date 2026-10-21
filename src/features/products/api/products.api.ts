@@ -1,6 +1,6 @@
 import { client } from "@shared/api/client";
 
-import type { Product, ProductListParams, ProductPage } from "../types";
+import type { Product, ProductListParams, ProductPage, SearchResult } from "../types";
 
 /**
  * `GET /products` answers with two different shapes:
@@ -38,6 +38,14 @@ class ProductsApi {
 
     async getById(id: string): Promise<Product> {
         const { data } = await client.get<{ success: boolean; data: Product }>(`/products/${id}`);
+        return data.data;
+    }
+
+    async search(keyword: string, signal?: AbortSignal): Promise<SearchResult> {
+        const { data } = await client.get<{ success: boolean; data: SearchResult }>("/products/search", {
+            params: { keyword },
+            signal,
+        });
         return data.data;
     }
 }

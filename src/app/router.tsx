@@ -18,6 +18,7 @@ import LandingPage from "@features/home/pages/LandingPage";
 // Everything else is split out — react-aria and the feature pages are heavy.
 const ProductsPage = lazy(() => import("@features/products/pages/ProductsPage"));
 const ProductDetailPage = lazy(() => import("@features/products/pages/ProductDetailPage"));
+const SearchPage = lazy(() => import("@features/products/pages/SearchPage"));
 const CartPage = lazy(() => import("@features/cart/pages/CartPage"));
 const CheckoutPage = lazy(() => import("@features/orders/pages/CheckoutPage"));
 const OrdersPage = lazy(() => import("@features/orders/pages/OrdersPage"));
@@ -69,6 +70,7 @@ export const router = createBrowserRouter([
                     { index: true, element: <LandingPage /> },
                     { path: "products", element: deferred(<ProductsPage />) },
                     { path: "products/:id", element: deferred(<ProductDetailPage />) },
+                    { path: "search", element: deferred(<SearchPage />) },
 
                     // Everything below needs a signed-in user.
                     {

@@ -8,6 +8,7 @@ export const queryKeys = {
         all: ["products"] as const,
         list: (params: ProductListParams) => ["products", "list", params] as const,
         detail: (id: string) => ["products", "detail", id] as const,
+        search: (keyword: string) => ["products", "search", keyword] as const,
     },
     cart: {
         all: ["cart"] as const,

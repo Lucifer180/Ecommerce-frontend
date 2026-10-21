@@ -33,7 +33,8 @@ export const Header = () => {
 
     const submitSearch = () => {
         const keyword = search.trim();
-        navigate(keyword ? `${ROUTES.PRODUCTS}?keyword=${encodeURIComponent(keyword)}` : ROUTES.PRODUCTS);
+        // Search goes to the external stores via Crawler-Service; an empty search just browses our catalogue.
+        navigate(keyword ? `${ROUTES.SEARCH}?q=${encodeURIComponent(keyword)}` : ROUTES.PRODUCTS);
         setIsMobileNavOpen(false);
     };
 
