@@ -1,0 +1,170 @@
+/* Ported from Vengeance UI's Line Hover Link (https://www.vengenceui.com/components/line-hover-link). */
+.link-hover {
+    cursor: pointer;
+    position: relative;
+    display: inline-flex;
+    width: fit-content;
+    white-space: nowrap;
+    color: currentColor;
+    text-decoration: none;
+    outline: none;
+}
+
+.link-hover::before,
+.link-hover::after {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+    pointer-events: none;
+}
+
+.link-hover::before {
+    content: "";
+}
+
+.link-hover:focus-visible {
+    border-radius: 0.25rem;
+    outline: 2px solid color-mix(in srgb, currentColor 45%, transparent);
+    outline-offset: 0.25rem;
+}
+
+/* The active route keeps its underline drawn. */
+.link-hover[aria-current="page"]::before {
+    transform: scale3d(1, 1, 1);
+}
+
+.link-hover--slide::before {
+    transform: scale3d(0, 1, 1);
+    transform-origin: 100% 50%;
+    transition: transform 0.3s ease;
+}
+
+.link-hover--slide:hover::before,
+.link-hover--slide:focus-visible::before,
+.link-hover--slide[aria-current="page"]::before {
+    transform: scale3d(1, 1, 1);
+    transform-origin: 0% 50%;
+}
+
+.link-hover--double::before {
+    transform: scale3d(0, 1, 1);
+    transform-origin: 100% 50%;
+    transition: transform 0.3s cubic-bezier(0.7, 0, 0.2, 1);
+}
+
+.link-hover--double:hover::before,
+.link-hover--double:focus-visible::before {
+    transform: scale3d(1, 1, 1);
+    transform-origin: 0% 50%;
+    transition-timing-function: cubic-bezier(0.4, 1, 0.8, 1);
+}
+
+.link-hover--double::after {
+    content: "";
+    top: calc(100% + 4px);
+    transform: scale3d(0, 1, 1);
+    transform-origin: 0% 50%;
+    transition: transform 0.3s cubic-bezier(0.7, 0, 0.2, 1);
+}
+
+.link-hover--double:hover::after,
+.link-hover--double:focus-visible::after {
+    transform: scale3d(1, 1, 1);
+    transform-origin: 100% 50%;
+    transition-timing-function: cubic-bezier(0.4, 1, 0.8, 1);
+}
+
+.link-hover--grow::before {
+    transform: scale3d(0, 1, 1);
+    transform-origin: 100% 50%;
+    transition: transform 0.3s cubic-bezier(0.2, 1, 0.8, 1);
+}
+
+.link-hover--grow:hover::before,
+.link-hover--grow:focus-visible::before,
+.link-hover--grow[aria-current="page"]::before {
+    transform: scale3d(1, 2, 1);
+    transform-origin: 0% 50%;
+    transition-timing-function: cubic-bezier(0.7, 0, 0.2, 1);
+}
+
+.link-hover--grow::after {
+    content: "";
+    top: calc(100% + 4px);
+    transform: scale3d(0, 1, 1);
+    transform-origin: 100% 50%;
+    transition: transform 0.4s 0.1s cubic-bezier(0.2, 1, 0.8, 1);
+}
+
+.link-hover--grow:hover::after,
+.link-hover--grow:focus-visible::after {
+    transform: scale3d(1, 1, 1);
+    transform-origin: 0% 50%;
+}
+
+.link-hover--fade::before,
+.link-hover--fade::after {
+    opacity: 0;
+    transform: translate3d(0, 3px, 0);
+    transform-origin: 50% 0%;
+    transition:
+        transform 0.3s cubic-bezier(0.2, 1, 0.8, 1),
+        opacity 0.3s cubic-bezier(0.2, 1, 0.8, 1);
+}
+
+.link-hover--fade::after {
+    content: "";
+    left: 15%;
+    top: calc(100% + 4px);
+    width: 70%;
+}
+
+.link-hover--fade:hover::before,
+.link-hover--fade:hover::after,
+.link-hover--fade:focus-visible::before,
+.link-hover--fade:focus-visible::after {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+}
+
+.link-hover--fade::before,
+.link-hover--fade:hover::after,
+.link-hover--fade:focus-visible::after {
+    transition-delay: 0.1s;
+}
+
+.link-hover--swap::before {
+    transform: scale3d(0, 1, 1);
+    transform-origin: 0% 50%;
+    transition: transform 0.3s ease;
+}
+
+.link-hover--swap:hover::before,
+.link-hover--swap:focus-visible::before {
+    transform: scale3d(1, 1, 1);
+}
+
+.link-hover--swap::after {
+    content: "";
+    top: calc(100% + 4px);
+    transform-origin: 100% 50%;
+    transition: transform 0.3s ease;
+}
+
+.link-hover--swap:hover::after,
+.link-hover--swap:focus-visible::after {
+    transform: scale3d(0, 1, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .link-hover,
+    .link-hover *,
+    .link-hover::before,
+    .link-hover::after {
+        animation: none !important;
+        transition-duration: 0.01ms !important;
+    }
+}

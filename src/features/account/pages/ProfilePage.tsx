@@ -1,6 +1,6 @@
 import { LogOut01, Package } from "@untitledui/icons";
 
-import { Avatar } from "@/components/base/avatar/avatar";
+import { BlobAvatar } from "@/components/base/avatar/blob-avatar";
 import { Badge } from "@/components/base/badges/badges";
 import { Button } from "@/components/base/buttons/button";
 import { useCurrentUser, useLogout } from "@features/auth";
@@ -22,7 +22,7 @@ export default function ProfilePage() {
 
             <section className="flex flex-col gap-6 rounded-2xl border border-secondary bg-primary p-6">
                 <div className="flex items-center gap-4">
-                    <Avatar size="xl" alt={user.name} initials={user.name?.slice(0, 2).toUpperCase()} />
+                    <BlobAvatar seed={user.email ?? user.name} size={72} animated alt={user.name} />
                     <div className="flex flex-col gap-1">
                         <div className="flex items-center gap-2">
                             <h2 className="text-lg font-semibold text-primary">{user.name}</h2>
