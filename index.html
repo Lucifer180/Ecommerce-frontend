@@ -11,6 +11,18 @@
       rel="stylesheet"
     />
     <title>Aurora — compare prices across stores</title>
+    <script>
+      // Mirrors applyTheme() in src/app/ThemeProvider.tsx; runs before paint so dark mode doesn't flash white.
+      (function () {
+        var theme;
+        try { theme = localStorage.getItem("aurora-theme"); } catch (e) {}
+        if (theme !== "light" && theme !== "dark") theme = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        var root = document.documentElement;
+        if (theme === "dark") root.classList.add("dark-mode");
+        root.dataset.theme = theme;
+        root.style.colorScheme = theme;
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

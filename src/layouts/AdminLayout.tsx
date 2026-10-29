@@ -5,6 +5,7 @@ import { cx } from "@/utils/cx";
 import { ROUTES } from "@routes/paths";
 
 import { Logo } from "./components/Logo";
+import { ThemeToggle } from "./components/ThemeToggle";
 
 const adminNav = [
     { label: "Products", to: ROUTES.ADMIN_PRODUCTS, icon: Package },
@@ -16,7 +17,10 @@ export default function AdminLayout() {
     return (
         <div className="flex min-h-screen flex-col bg-secondary lg:flex-row">
             <aside className="flex shrink-0 flex-col gap-6 border-b border-secondary bg-primary p-4 lg:w-64 lg:border-r lg:border-b-0 lg:p-6">
-                <Logo />
+                <div className="flex items-center justify-between">
+                    <Logo />
+                    <ThemeToggle />
+                </div>
 
                 <nav className="flex gap-2 overflow-x-auto lg:flex-col lg:overflow-visible">
                     {adminNav.map(({ label, to, icon: Icon }) => (

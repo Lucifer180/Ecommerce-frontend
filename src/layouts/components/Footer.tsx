@@ -25,7 +25,7 @@ const footerSections = [
 ];
 
 export const Footer = () => (
-    <footer className="relative overflow-hidden bg-aurora text-white">
+    <footer className="relative overflow-hidden bg-aurora text-white dark:border-t dark:border-white/10">
         <div className="pointer-events-none absolute inset-0 bg-dot-grid" aria-hidden />
         <div className="relative mx-auto flex w-full max-w-container flex-col gap-12 px-4 py-16 md:px-8">
             <div className="flex flex-col gap-10 md:flex-row md:justify-between">
