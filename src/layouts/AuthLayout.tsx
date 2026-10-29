@@ -3,6 +3,7 @@ import { CreditCard02, Package, ShieldTick } from "@untitledui/icons";
 import { ThinkingOrb } from "thinking-orbs";
 
 import { Logo } from "./components/Logo";
+import { ThemeToggle } from "./components/ThemeToggle";
 
 const highlights = [
     { icon: Package, title: "Track every order", description: "See what you've bought and where it is." },
@@ -14,7 +15,10 @@ export default function AuthLayout() {
     return (
         <div className="flex min-h-screen bg-primary">
             <div className="flex flex-1 flex-col px-4 py-8 md:px-8">
-                <Logo />
+                <div className="flex items-center justify-between">
+                    <Logo />
+                    <ThemeToggle />
+                </div>
                 <div className="flex flex-1 items-center justify-center py-12">
                     <div className="w-full max-w-sm">
                         <Outlet />
@@ -23,7 +27,7 @@ export default function AuthLayout() {
             </div>
 
             {/* Decorative panel — hidden on small screens where it would just push the form down. */}
-            <aside className="relative m-3 hidden w-1/2 max-w-2xl flex-col justify-center gap-10 overflow-hidden rounded-[2rem] bg-aurora p-16 lg:flex">
+            <aside className="relative m-3 hidden w-1/2 max-w-2xl flex-col justify-center gap-10 overflow-hidden rounded-[2rem] bg-aurora p-16 ring-white/10 lg:flex dark:ring-1">
                 <div className="pointer-events-none absolute inset-0 bg-dot-grid" aria-hidden />
                 <ThinkingOrb state="weaving" size={64} theme="dark" className="relative" />
                 <h2 className="relative text-display-md font-bold text-white">Everything you need, in one place.</h2>

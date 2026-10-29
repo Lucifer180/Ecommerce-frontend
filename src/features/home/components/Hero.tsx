@@ -12,7 +12,7 @@ export const Hero = () => {
     const [query, setQuery] = useState("");
 
     return (
-        <section className="relative overflow-hidden bg-aurora text-white">
+        <section className="relative overflow-hidden bg-aurora text-white dark:border-b dark:border-white/10">
             <div className="pointer-events-none absolute inset-0 bg-dot-grid [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" aria-hidden />
 
             <div className="relative mx-auto flex w-full max-w-container flex-col items-center gap-10 px-4 pt-20 pb-24 text-center md:px-8 md:pt-28 md:pb-32">

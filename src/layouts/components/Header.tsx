@@ -13,6 +13,7 @@ import { useCartCount } from "@features/cart";
 import { ROUTES } from "@routes/paths";
 
 import { Logo } from "./Logo";
+import { ThemeToggle } from "./ThemeToggle";
 
 const navLinks = [
     { label: "Home", to: ROUTES.HOME, end: true },
@@ -39,7 +40,7 @@ export const Header = () => {
 
     return (
         <header className="sticky top-0 z-50 border-b border-secondary/70 bg-primary/75 backdrop-blur-xl">
-            <div className="mx-auto flex h-16 w-full max-w-container items-center gap-8 px-4 md:px-8">
+            <div className="mx-auto flex h-16 w-full max-w-container items-center gap-4 px-4 md:gap-8 md:px-8">
                 <Logo />
 
                 <nav className="hidden items-center gap-7 md:flex">
@@ -60,7 +61,8 @@ export const Header = () => {
                     <Input aria-label="Search products" icon={SearchLg} placeholder="Search products" value={search} onChange={setSearch} size="sm" />
                 </form>
 
-                <div className="ml-auto flex items-center gap-2 lg:ml-0">
+                <div className="ml-auto flex items-center gap-1 sm:gap-2 lg:ml-0">
+                    <ThemeToggle />
                     <Link
                         to={ROUTES.CART}
                         aria-label={`Cart, ${cartCount} items`}

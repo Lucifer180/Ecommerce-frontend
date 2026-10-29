@@ -10,7 +10,7 @@ export const CallToAction = () => {
 
     return (
         <section className="bg-primary px-4 py-20 md:px-8 md:py-28">
-            <div className="relative mx-auto flex w-full max-w-container flex-col items-center gap-8 overflow-hidden rounded-[2rem] bg-aurora px-6 py-16 text-center md:py-24">
+            <div className="relative mx-auto flex w-full max-w-container flex-col items-center gap-8 overflow-hidden rounded-[2rem] bg-aurora px-6 py-16 text-center ring-white/10 md:py-24 dark:ring-1">
                 <div className="pointer-events-none absolute inset-0 bg-dot-grid" aria-hidden />
                 <ThinkingOrb state="breathing" size={64} theme="dark" className="relative" />
 
