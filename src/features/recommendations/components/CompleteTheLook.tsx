@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Stars02 } from "@untitledui/icons";
+import { ThinkingOrb } from "thinking-orbs";
 
 import { Button } from "@/components/base/buttons/button";
 import { cx } from "@/utils/cx";
@@ -40,7 +41,10 @@ export const CompleteTheLook = ({ product, variant = "section", enabled = true, 
     if (isPending) {
         return (
             <div role="status" className={cx("flex flex-col gap-2", className)}>
-                <span className="sr-only">Loading suggestions</span>
+                <span className="flex items-center gap-2 text-sm text-tertiary">
+                    <ThinkingOrb state="composing" size={20} aria-hidden />
+                    Styling this for you…
+                </span>
                 {Array.from({ length: compact ? 3 : 4 }).map((_, index) => (
                     <div key={index} className={cx("animate-pulse rounded-lg bg-secondary", compact ? "h-9" : "h-20")} />
                 ))}

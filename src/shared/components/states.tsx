@@ -1,27 +1,15 @@
 import type { FC, ReactNode } from "react";
 import { AlertCircle, SearchLg } from "@untitledui/icons";
+import { ThinkingOrb, type OrbState } from "thinking-orbs";
 
 import { Button } from "@/components/base/buttons/button";
 import { FeaturedIcon } from "@/components/foundations/featured-icon/featured-icon";
 import { cx } from "@/utils/cx";
 
-/** Matches the spinner Untitled UI's Button draws inline, so loading states look alike. */
-export const PageSpinner = ({ className }: { className?: string }) => (
+/** Full-area loader; a thinking orb (https://libraries.dev/orbs) in place of a spinner. */
+export const PageSpinner = ({ className, state = "working" }: { className?: string; state?: OrbState }) => (
     <div role="status" className={cx("flex min-h-60 w-full items-center justify-center", className)}>
-        <svg fill="none" viewBox="0 0 20 20" className="size-6 text-fg-brand-primary">
-            <circle className="stroke-current opacity-30" cx="10" cy="10" r="8" fill="none" strokeWidth="2" />
-            <circle
-                className="origin-center animate-spin stroke-current"
-                cx="10"
-                cy="10"
-                r="8"
-                fill="none"
-                strokeWidth="2"
-                strokeDasharray="12.5 50"
-                strokeLinecap="round"
-            />
-        </svg>
-        <span className="sr-only">Loading</span>
+        <ThinkingOrb state={state} size={64} aria-label="Loading" />
     </div>
 );
 

@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button as AriaButton } from "react-aria-components";
 import { LogOut01, Menu02, Package, SearchLg, Settings01, ShoppingCart01, User01, X as XIcon } from "@untitledui/icons";
 
-import { Avatar } from "@/components/base/avatar/avatar";
+import { BlobAvatar } from "@/components/base/avatar/blob-avatar";
 import { Button } from "@/components/base/buttons/button";
 import { Dropdown } from "@/components/base/dropdown/dropdown";
 import { Input } from "@/components/base/input/input";
-import { cx } from "@/utils/cx";
+import { LineHoverLink } from "@/components/base/line-hover-link/line-hover-link";
 import { useCurrentUser, useLogout } from "@features/auth";
 import { useCartCount } from "@features/cart";
 import { ROUTES } from "@routes/paths";
@@ -19,8 +19,7 @@ const navLinks = [
     { label: "Search", to: ROUTES.SEARCH, end: false },
 ];
 
-const navLinkClass = ({ isActive }: { isActive: boolean }) =>
-    cx("text-md font-semibold transition-colors", isActive ? "text-brand-secondary" : "text-secondary hover:text-primary");
+const navLinkClass = "text-md font-medium text-tertiary transition-colors hover:text-primary aria-[current=page]:text-primary";
 
 export const Header = () => {
     const { user, isAuthenticated, isAdmin } = useCurrentUser();
@@ -39,15 +38,15 @@ export const Header = () => {
     };
 
     return (
-        <header className="sticky top-0 z-50 border-b border-secondary bg-primary/95 backdrop-blur-sm">
-            <div className="mx-auto flex h-16 w-full max-w-container items-center gap-6 px-4 md:px-8">
+        <header className="sticky top-0 z-50 border-b border-secondary/70 bg-primary/75 backdrop-blur-xl">
+            <div className="mx-auto flex h-16 w-full max-w-container items-center gap-8 px-4 md:px-8">
                 <Logo />
 
-                <nav className="hidden items-center gap-6 md:flex">
+                <nav className="hidden items-center gap-7 md:flex">
                     {navLinks.map((link) => (
-                        <NavLink key={link.to} to={link.to} end={link.end} className={navLinkClass}>
+                        <LineHoverLink key={link.to} to={link.to} end={link.end} variant="slide" className={navLinkClass}>
                             {link.label}
-                        </NavLink>
+                        </LineHoverLink>
                     ))}
                 </nav>
 
@@ -65,11 +64,11 @@ export const Header = () => {
                     <Link
                         to={ROUTES.CART}
                         aria-label={`Cart, ${cartCount} items`}
-                        className="relative flex size-10 items-center justify-center rounded-lg text-fg-secondary transition hover:bg-primary_hover"
+                        className="relative flex size-10 items-center justify-center rounded-full text-fg-secondary transition hover:bg-primary_hover"
                     >
                         <ShoppingCart01 className="size-5" />
                         {cartCount > 0 && (
-                            <span className="absolute top-1 right-0.5 flex min-w-4.5 items-center justify-center rounded-full bg-brand-solid px-1 text-[10px] font-semibold text-white">
+                            <span className="absolute top-1 right-0.5 flex min-w-4.5 items-center justify-center rounded-full bg-linear-to-r from-brand-600 to-pink-500 px-1 text-[10px] font-semibold text-white">
                                 {cartCount > 99 ? "99+" : cartCount}
                             </span>
                         )}
@@ -81,7 +80,7 @@ export const Header = () => {
                                 aria-label="Account menu"
                                 className="cursor-pointer rounded-full outline-focus-ring focus-visible:outline-2 focus-visible:outline-offset-2"
                             >
-                                <Avatar size="sm" alt={user?.name} initials={user?.name?.slice(0, 2).toUpperCase()} />
+                                <BlobAvatar seed={user?.email ?? user?.name ?? "guest"} size={36} animated alt={user?.name} />
                             </AriaButton>
                             <Dropdown.Popover>
                                 <Dropdown.Menu>
@@ -108,7 +107,7 @@ export const Header = () => {
                             <Button color="tertiary" size="md" href={ROUTES.LOGIN}>
                                 Sign in
                             </Button>
-                            <Button size="md" href={ROUTES.REGISTER}>
+                            <Button size="md" href={ROUTES.REGISTER} className="rounded-full">
                                 Sign up
                             </Button>
                         </div>
@@ -118,7 +117,7 @@ export const Header = () => {
                         type="button"
                         aria-label={isMobileNavOpen ? "Close menu" : "Open menu"}
                         aria-expanded={isMobileNavOpen}
-                        className="flex size-10 items-center justify-center rounded-lg text-fg-secondary transition hover:bg-primary_hover md:hidden"
+                        className="flex size-10 items-center justify-center rounded-full text-fg-secondary transition hover:bg-primary_hover md:hidden"
                         onClick={() => setIsMobileNavOpen((open) => !open)}
                     >
                         {isMobileNavOpen ? <XIcon className="size-5" /> : <Menu02 className="size-5" />}
@@ -137,11 +136,18 @@ export const Header = () => {
                         <Input aria-label="Search products" icon={SearchLg} placeholder="Search products" value={search} onChange={setSearch} />
                     </form>
 
-                    <nav className="flex flex-col gap-3">
+                    <nav className="flex flex-col items-start gap-4">
                         {navLinks.map((link) => (
-                            <NavLink key={link.to} to={link.to} end={link.end} className={navLinkClass} onClick={() => setIsMobileNavOpen(false)}>
+                            <LineHoverLink
+                                key={link.to}
+                                to={link.to}
+                                end={link.end}
+                                variant="slide"
+                                className={navLinkClass}
+                                onClick={() => setIsMobileNavOpen(false)}
+                            >
                                 {link.label}
-                            </NavLink>
+                            </LineHoverLink>
                         ))}
                     </nav>
 

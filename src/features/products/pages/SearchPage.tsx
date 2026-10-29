@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { SearchLg } from "@untitledui/icons";
+import { ThinkingOrb } from "thinking-orbs";
 
 import { Button } from "@/components/base/buttons/button";
 import { Input } from "@/components/base/input/input";
@@ -24,7 +25,7 @@ export default function SearchPage() {
     return (
         <div className="mx-auto flex w-full max-w-container flex-col gap-8 px-4 py-8 md:px-8 md:py-12">
             <header className="flex flex-col gap-2">
-                <h1 className="text-display-sm font-semibold text-primary">{keyword ? `Results for “${keyword}”` : "Search"}</h1>
+                <h1 className="text-display-sm font-bold text-primary md:text-display-md">{keyword ? `Results for “${keyword}”` : "Search"}</h1>
                 <p className="text-md text-tertiary">
                     {data
                         ? `${data.total} ${data.total === 1 ? "product" : "products"} across ${data.sources.length} stores`
@@ -41,9 +42,10 @@ export default function SearchPage() {
                 <ErrorState description={getApiErrorMessage(error, "We couldn't search the stores right now.")} onRetry={() => refetch()} />
             ) : isPending ? (
                 <div className="flex flex-col gap-6">
-                    <p role="status" className="text-md text-tertiary">
-                        Searching Amazon, Flipkart and Myntra… this can take up to a minute.
-                    </p>
+                    <div role="status" className="flex items-center gap-4 rounded-2xl border border-secondary bg-secondary/40 p-4">
+                        <ThinkingOrb state="searching" size={32} aria-hidden />
+                        <p className="text-md text-secondary">Searching Amazon, Flipkart and Myntra… this can take up to a minute.</p>
+                    </div>
                     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                         {Array.from({ length: 8 }).map((_, index) => (
                             <OfferCardSkeleton key={index} />

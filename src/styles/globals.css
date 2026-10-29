@@ -39,6 +39,27 @@ body {
     font-kerning: normal;
 }
 
+h1,
+h2,
+h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+}
+
+/* Soft indigo glow used behind hero and auth panels. */
+@utility bg-aurora {
+    background-color: rgb(9 9 20);
+    background-image:
+        radial-gradient(60% 50% at 20% 10%, rgb(79 70 229 / 0.45), transparent 70%),
+        radial-gradient(50% 45% at 85% 30%, rgb(236 72 153 / 0.22), transparent 70%),
+        radial-gradient(70% 60% at 50% 110%, rgb(14 165 233 / 0.25), transparent 70%);
+}
+
+@utility bg-dot-grid {
+    background-image: radial-gradient(rgb(255 255 255 / 0.08) 1px, transparent 1px);
+    background-size: 22px 22px;
+}
+
 /* Hide the default expand arrow on Safari.  */
 details summary::-webkit-details-marker {
     display: none;

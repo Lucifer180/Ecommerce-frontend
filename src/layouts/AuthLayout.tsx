@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { CreditCard02, Package, ShieldTick } from "@untitledui/icons";
+import { ThinkingOrb } from "thinking-orbs";
 
 import { Logo } from "./components/Logo";
 
@@ -22,9 +23,11 @@ export default function AuthLayout() {
             </div>
 
             {/* Decorative panel — hidden on small screens where it would just push the form down. */}
-            <aside className="hidden w-1/2 max-w-2xl flex-col justify-center gap-10 bg-linear-to-br from-brand-800 to-brand-600 p-16 lg:flex">
-                <h2 className="text-display-md font-semibold text-white">Everything you need, in one place.</h2>
-                <ul className="flex flex-col gap-6">
+            <aside className="relative m-3 hidden w-1/2 max-w-2xl flex-col justify-center gap-10 overflow-hidden rounded-[2rem] bg-aurora p-16 lg:flex">
+                <div className="pointer-events-none absolute inset-0 bg-dot-grid" aria-hidden />
+                <ThinkingOrb state="weaving" size={64} theme="dark" className="relative" />
+                <h2 className="relative text-display-md font-bold text-white">Everything you need, in one place.</h2>
+                <ul className="relative flex flex-col gap-6">
                     {highlights.map(({ icon: Icon, title, description }) => (
                         <li key={title} className="flex items-start gap-4">
                             <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-white/15">
