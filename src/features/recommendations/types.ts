@@ -18,6 +18,29 @@ export interface SimilarItem {
     reason: string;
 }
 
+/** The product the look is built around, as shown in the 3D view. */
+export interface LookAnchor {
+    title: string;
+    image?: string;
+    price?: number;
+}
+
+/** One card in the 3D carousel. */
+export interface LookPiece {
+    key: string;
+    category: string;
+    title: string;
+    reason?: string;
+    /** What clicking the piece searches for. */
+    query: string;
+    image?: string;
+    price?: number;
+    platform?: string;
+    /** "empty": the search ran but found nothing with a photo. */
+    status: "loading" | "ready" | "empty" | "error";
+    isAnchor?: boolean;
+}
+
 export interface Recommendations {
     complete: CompleteTheLookItem[];
     similar: SimilarItem[];
