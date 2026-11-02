@@ -110,7 +110,14 @@ export const OfferCard = ({ group }: { group: ProductGroup }) => {
                         <ChevronDown className={cx("size-4 transition", isStyling && "rotate-180")} aria-hidden />
                     </button>
                     {/* Only asks the model once the user opens it. */}
-                    {isStyling && <CompleteTheLook product={{ title: group.title, brand: group.brand || undefined }} variant="compact" className="mt-3" />}
+                    {isStyling && (
+                        <CompleteTheLook
+                            product={{ title: group.title, brand: group.brand || undefined }}
+                            anchor={{ title: group.title, image, price: offers[0]?.price }}
+                            variant="compact"
+                            className="mt-3"
+                        />
+                    )}
                 </div>
             </div>
         </article>

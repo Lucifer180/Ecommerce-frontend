@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Stars02 } from "@untitledui/icons";
+import { ArrowRight, Cube01, Stars02 } from "@untitledui/icons";
 import { ThinkingOrb } from "thinking-orbs";
 
 import { Button } from "@/components/base/buttons/button";
@@ -7,7 +8,8 @@ import { cx } from "@/utils/cx";
 import { ROUTES } from "@routes/paths";
 
 import { useRecommendations } from "../hooks/useRecommendations";
-import type { RecommendationInput } from "../types";
+import type { LookAnchor, RecommendationInput } from "../types";
+import { LookViewer } from "./look/LookViewer";
 
 const searchHref = (query: string) => `${ROUTES.SEARCH}?q=${encodeURIComponent(query)}`;
 
@@ -16,6 +18,8 @@ type Props = {
     /** "section" for a product page, "compact" inside a search result card. */
     variant?: "section" | "compact";
     enabled?: boolean;
+    /** Photo and price of the product, for the 3D look view. Defaults to just its title. */
+    anchor?: LookAnchor;
     className?: string;
 };
 
@@ -23,8 +27,9 @@ type Props = {
  * Items that go with the product, suggested by the LLM. Each suggestion is a
  * search query, so clicking one runs a live search across the stores.
  */
-export const CompleteTheLook = ({ product, variant = "section", enabled = true, className }: Props) => {
+export const CompleteTheLook = ({ product, variant = "section", enabled = true, anchor, className }: Props) => {
     const { data, isPending, isError, refetch } = useRecommendations(product, enabled);
+    const [isViewerOpen, setIsViewerOpen] = useState(false);
     const compact = variant === "compact";
 
     if (isError) {
@@ -55,9 +60,24 @@ export const CompleteTheLook = ({ product, variant = "section", enabled = true, 
     // Nothing sensible to suggest: hide rather than show an empty box.
     if (!data.complete.length && !data.similar.length) return null;
 
+    const viewer = data.complete.length > 0 && (
+        <>
+            <button
+                type="button"
+                onClick={() => setIsViewerOpen(true)}
+                className="group/look flex w-full items-center justify-center gap-2 rounded-xl border border-brand bg-brand-primary_alt px-3 py-2.5 text-sm font-semibold text-brand-secondary transition hover:bg-brand-solid hover:text-white"
+            >
+                <Cube01 className="size-4 transition duration-500 group-hover/look:rotate-180" aria-hidden />
+                View the look in 3D
+            </button>
+            <LookViewer isOpen={isViewerOpen} onOpenChange={setIsViewerOpen} anchor={anchor ?? { title: product.title }} items={data.complete} />
+        </>
+    );
+
     if (compact) {
         return (
             <div className={cx("flex flex-col gap-3", className)}>
+                {viewer}
                 {data.complete.length > 0 && (
                     <ul className="flex flex-col gap-1.5">
                         {data.complete.map((item) => (
@@ -112,6 +132,8 @@ export const CompleteTheLook = ({ product, variant = "section", enabled = true, 
                     ))}
                 </ul>
             )}
+
+            {viewer && <div className="sm:max-w-xs">{viewer}</div>}
 
             {data.similar.length > 0 && (
                 <div className="flex flex-col gap-2">
